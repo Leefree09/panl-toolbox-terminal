@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "panl-toolbox-terminal"
+version = "1.0.0"
+description = "PANL Toolbox Terminal — public CLI for the PANL open comic container format."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "PANL Format contributors"},
+]
+keywords = ["panl", "comic", "container", "avif", "cbz"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Multimedia :: Graphics",
+    "Programming Language :: Python :: 3",
+]
+
+# The CLI delegates the heavy lifting (encode/validate/etc.) to the
+# reference KPOW v1 reader/writer package, which currently ships under
+# the historical "kpow" distribution name. The dependency will be
+# renamed when the underlying package is renamed; until then the CLI
+# imports it under that name internally and presents PANL naming
+# everywhere user-visible.
+dependencies = [
+    "kpow >= 0.3.0",
+]
+
+[project.scripts]
+panl = "panl_toolbox_terminal.cli:main"
+panl-toolbox = "panl_toolbox_terminal.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["panl_toolbox_terminal*"]
